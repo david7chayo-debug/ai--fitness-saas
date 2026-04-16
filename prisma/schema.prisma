@@ -1,0 +1,189 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String      @id @default(cuid())
+  email         String      @unique
+  passwordHash  String
+  name          String?
+  language      String      @default("es")
+  isActive      Boolean     @default(false)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  onboarding    Onboarding?
+  plans         Plan[]
+  checkIns      CheckIn[]
+  payments      Payment[]
+  wallets       Wallet[]
+  chatMessages  ChatMessage[]
+
+  @@index([email])
+}
+
+model Onboarding {
+  id              String          @id @default(cuid())
+  userId          String          @unique
+  user            User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  weightKg        Float
+  heightCm        Float
+  bodyFatPct      Float?
+  activityLevel   ActivityLevel
+  goal            FitnessGoal
+  sleepHours      Float           @default(7)
+  weeklyBudget    Float?
+  age             Int
+  gender          Gender
+
+  completedAt     DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  @@index([userId])
+}
+
+model Plan {
+  id              String      @id @default(cuid())
+  userId          String
+  user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  weekNumber      Int         @default(1)
+  calories        Int
+  proteinG        Float
+  carbsG          Float
+  fatG            Float
+  tdee            Int
+  bmr             Int
+
+  nutritionPlan   Json
+  workoutPlan     Json
+  shoppingList    Json
+  explanation     String      @db.Text
+
+  isActive        Boolean     @default(true)
+  generatedAt     DateTime    @default(now())
+  validUntil      DateTime
+
+  @@index([userId, isActive])
+  @@index([userId, weekNumber])
+}
+
+model CheckIn {
+  id              String      @id @default(cuid())
+  userId          String
+  user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  weekNumber      Int
+  weightKg        Float
+  adherencePct    Float
+  notes           String?     @db.Text
+  mood            Int?
+
+  adjustment      Json?
+
+  createdAt       DateTime    @default(now())
+
+  @@index([userId])
+  @@index([userId, weekNumber])
+}
+
+model Payment {
+  id              String          @id @default(cuid())
+  userId          String
+  user            User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  amount          Float
+  currency        String          @default("USDT")
+  network         PaymentNetwork
+  txHash          String?         @unique
+  fromAddress     String?
+  toAddress       String
+  status          PaymentStatus   @default(PENDING)
+  planMonths      Int             @default(1)
+
+  reference       String          @unique @default(cuid())
+  confirmedAt     DateTime?
+  expiresAt       DateTime
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  @@index([userId])
+  @@index([txHash])
+  @@index([reference])
+  @@index([status])
+}
+
+model Wallet {
+  id              String          @id @default(cuid())
+  userId          String
+  user            User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  network         PaymentNetwork
+  address         String
+  label           String?
+
+  createdAt       DateTime        @default(now())
+
+  @@unique([userId, network])
+  @@index([address])
+}
+
+model ChatMessage {
+  id              String      @id @default(cuid())
+  userId          String
+  user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  role            MessageRole
+  content         String      @db.Text
+  tokens          Int?
+
+  createdAt       DateTime    @default(now())
+
+  @@index([userId, createdAt])
+}
+
+enum ActivityLevel {
+  SEDENTARY
+  LOW
+  MEDIUM
+  HIGH
+  VERY_HIGH
+}
+
+enum FitnessGoal {
+  FAT_LOSS
+  MUSCLE_GAIN
+  RECOMPOSITION
+  MAINTENANCE
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+}
+
+enum PaymentStatus {
+  PENDING
+  CONFIRMING
+  CONFIRMED
+  FAILED
+  EXPIRED
+}
+
+enum PaymentNetwork {
+  TRON
+  ETHEREUM
+}
+
+enum MessageRole {
+  USER
+  ASSISTANT
+  SYSTEM
+}
