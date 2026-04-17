@@ -1,0 +1,111 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                  Int           @id @default(autoincrement())
+  email               String        @unique
+  name                String?
+  password            String
+  gender              String?
+  age                 Int?
+  height              Float?
+  weight              Float?
+  bodyFat             Float?
+  activityLevel       String?
+  goal                String?
+  trainingExperience  String?
+  trainingFrequency   Int?
+  eatingPreference    String?
+  dietaryRestrictions String?
+  walletAddress       String?
+  planType            String        @default("free")
+  calories            Int?
+  protein             Int?
+  carbs               Int?
+  fat                 Int?
+  createdAt           DateTime      @default(now())
+  updatedAt           DateTime      @updatedAt
+  plans               Plan[]        @relation("UserPlans")
+  checkins            Checkin[]     @relation("UserCheckins")
+  onboardings         Onboarding[]  @relation("UserOnboardings")
+  payments            Payment[]     @relation("UserPayments")
+  chatMemories        ChatMemory[]
+}
+
+model Onboarding {
+  id                  Int      @id @default(autoincrement())
+  user                User     @relation(fields: [userId], references: [id], name: "UserOnboardings")
+  userId              Int
+  gender              String
+  age                 Int
+  weight              Float
+  height              Float
+  bodyFat             Float?
+  activityLevel       String
+  goal                String
+  trainingExperience  String
+  trainingFrequency   Int
+  eatingPreference    String
+  dietaryRestrictions String?
+  calories            Int
+  protein             Int
+  carbs               Int
+  fat                 Int
+  createdAt           DateTime @default(now())
+}
+
+model Payment {
+  id          Int      @id @default(autoincrement())
+  user        User     @relation(fields: [userId], references: [id], name: "UserPayments")
+  userId      Int
+  amount      Float
+  currency    String
+  txHash      String   @unique
+  status      String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Plan {
+  id             Int      @id @default(autoincrement())
+  user           User     @relation(fields: [userId], references: [id], name: "UserPlans")
+  userId         Int
+  generatedAt    DateTime @default(now())
+  calories       Int
+  protein        Int
+  carbs          Int
+  fat            Int
+  meals          String
+  trainingSplit  String
+  shoppingList   String
+  explanation    String
+  goal           String?
+  eatingPreference String?
+}
+
+model Checkin {
+  id       Int      @id @default(autoincrement())
+  user     User     @relation(fields: [userId], references: [id], name: "UserCheckins")
+  userId   Int
+  date     DateTime @default(now())
+  rating   Int
+  comment  String?
+  weight   Float?
+  calories Int?
+}
+
+model ChatMemory {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  role      String
+  message   String
+  reply     String
+  createdAt DateTime @default(now())
+}
