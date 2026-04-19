@@ -4,6 +4,7 @@ import { TabBar } from '../ui/TabBar'
 import { LangToggle } from '../ui/LangToggle'
 import { ItemCard } from '../ui/ItemCard'
 import { DIYBuilder } from './DIYBuilder'
+import { usePromoSettings } from '../hooks/usePromoSettings'
 
 const TAB_ORDER = ['beer', 'spirits', 'cocktails', 'diy', 'soft', 'coffee', 'food', 'morning']
 
@@ -25,6 +26,7 @@ function SubcatHeader({ title }) {
 
 export function MenuView({ menu, lang, setLang, onBack }) {
   const [activeTab, setActiveTab] = useState('beer')
+  const [promoSettings] = usePromoSettings()
 
   const tabs = TAB_ORDER.map(key => {
     const cat = menu[key]
@@ -43,18 +45,21 @@ export function MenuView({ menu, lang, setLang, onBack }) {
   return (
     <div style={{ minHeight: '100vh', paddingBottom: 40 }}>
       {/* Promo Banner */}
-      <div style={{
-        background: `linear-gradient(135deg, ${theme.copper}, ${theme.gold}, ${theme.brass})`,
-        padding: '10px 16px',
-        textAlign: 'center',
-      }}>
-        <div style={{ fontSize: 15, fontWeight: 700, color: theme.ink }}>
-          🥃 {lang === 'he' ? 'קונים בירה — מקבלים שוט על הבית!' : 'Buy a beer — get a free shot!'}
+      {promoSettings.active && (
+        <div style={{
+          background: `linear-gradient(135deg, ${theme.copper}, ${theme.gold}, ${theme.brass})`,
+          padding: '10px 16px',
+          textAlign: 'center',
+          borderBottom: `3px solid ${theme.jerusalemBlue}`,
+        }}>
+          <div style={{ fontSize: 15, fontWeight: 700, color: theme.ink }}>
+            🥃 {lang === 'he' ? promoSettings.text_he : promoSettings.text_en}
+          </div>
+          <div style={{ fontSize: 11, color: theme.ink, opacity: 0.75, marginTop: 2 }}>
+            {lang === 'he' ? promoSettings.subtext_he : promoSettings.subtext_en}
+          </div>
         </div>
-        <div style={{ fontSize: 11, color: theme.ink, opacity: 0.75, marginTop: 2 }}>
-          {lang === 'he' ? 'כל הלילה · בירה בלבד' : 'All night · Beer only'}
-        </div>
-      </div>
+      )}
 
       {/* Header */}
       <div style={{
@@ -70,7 +75,7 @@ export function MenuView({ menu, lang, setLang, onBack }) {
         >
           {lang === 'he' ? '← חזרה' : '← Back'}
         </button>
-        <span style={{ fontSize: 16, fontWeight: 900, color: theme.gold, letterSpacing: 3 }}>
+        <span style={{ fontSize: 16, fontWeight: 900, color: theme.gold, letterSpacing: 3, fontFamily: "'Rubik', 'Frank Ruhl Libre', serif" }}>
           אצל יוסי
         </span>
         <LangToggle lang={lang} setLang={setLang} />

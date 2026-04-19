@@ -36,7 +36,7 @@ export function LandingPage({ lang, setLang, onEnterMenu, onLogin }) {
       {/* Main content */}
       <div style={{ animation: 'fadeSlideIn 400ms cubic-bezier(0.4,0,0.2,1) both' }}>
         <h1 style={{
-          fontFamily: "'Frank Ruhl Libre', serif",
+          fontFamily: "'Rubik', serif",
           fontWeight: 900,
           fontSize: 72,
           color: theme.gold,
@@ -61,7 +61,7 @@ export function LandingPage({ lang, setLang, onEnterMenu, onLogin }) {
 
         <p style={{
           fontSize: 13,
-          color: theme.warmGray,
+          color: theme.jerusalemBlue,
           fontWeight: 300,
           marginBottom: 48,
           letterSpacing: 1,

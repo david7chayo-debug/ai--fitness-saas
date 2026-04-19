@@ -10,6 +10,8 @@ export const theme = {
   brass:     '#9A6F1A',
   copper:    '#7A5515',
   ink:       '#1C1008',
+  stoneCream:    '#F5F0E8',
+  jerusalemBlue: '#1A3A6B',
 }
 
 export const fonts = {
