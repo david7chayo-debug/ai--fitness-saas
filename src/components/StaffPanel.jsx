@@ -5,15 +5,18 @@ import { AvailabilityEditor } from './AvailabilityEditor'
 import { MenuEditor } from './MenuEditor'
 import { IGPlanner } from './IGPlanner'
 import { PromoCalc } from './PromoCalc'
+import { AlertCenter } from './AlertCenter'
+import { useAlerts } from '../hooks/useAlerts'
 
 const ROLE_TABS = {
   bar:   ['availability'],
-  yosi:  ['availability', 'instagram', 'promo'],
-  admin: ['availability', 'menu', 'instagram', 'promo'],
+  yosi:  ['availability', 'alerts', 'instagram', 'promo'],
+  admin: ['availability', 'menu', 'alerts', 'instagram', 'promo'],
 }
 
 const TAB_META = {
   availability: { icon: '🟢', he: 'זמינות', en: 'Availability' },
+  alerts:       { icon: '🚨', he: 'התראות', en: 'Alerts' },
   menu:         { icon: '✏️', he: 'תפריט', en: 'Menu' },
   instagram:    { icon: '📸', he: 'אינסטגרם', en: 'Instagram' },
   promo:        { icon: '💰', he: 'רווחים', en: 'Profits' },
@@ -23,6 +26,7 @@ export function StaffPanel({ user, menu, setMenu, lang, setLang, onLogout, onVie
   const tabs = ROLE_TABS[user.role] || ['availability']
   const [active, setActive] = useState(tabs[0])
   const isHe = lang === 'he'
+  const { unresolvedCount } = useAlerts()
 
   return (
     <div style={{ minHeight: '100vh', paddingBottom: 70 }}>
@@ -79,6 +83,7 @@ export function StaffPanel({ user, menu, setMenu, lang, setLang, onLogout, onVie
       <div key={active} style={{ animation: 'fadeSlideIn 200ms cubic-bezier(0.4,0,0.2,1) both' }}>
         {active === 'availability' && <AvailabilityEditor menu={menu} setMenu={setMenu} lang={lang} />}
         {active === 'menu'         && <MenuEditor menu={menu} setMenu={setMenu} lang={lang} />}
+        {active === 'alerts'       && <AlertCenter lang={lang} />}
         {active === 'instagram'    && <IGPlanner lang={lang} />}
         {active === 'promo'        && <PromoCalc lang={lang} />}
       </div>
@@ -109,9 +114,31 @@ export function StaffPanel({ user, menu, setMenu, lang, setLang, onLogout, onVie
                 textAlign: 'center',
                 borderTop: `2px solid ${isAct ? theme.gold : 'transparent'}`,
                 transition: `border-color 150ms ${ease}`,
+                position: 'relative',
               }}
             >
-              <div style={{ fontSize: 18, lineHeight: 1 }}>{meta.icon}</div>
+              <div style={{ fontSize: 18, lineHeight: 1, position: 'relative' }}>
+                {meta.icon}
+                {tabId === 'alerts' && unresolvedCount > 0 && (
+                  <div style={{
+                    position: 'absolute',
+                    top: -4,
+                    right: -4,
+                    width: 16,
+                    height: 16,
+                    borderRadius: '50%',
+                    background: '#B22222',
+                    color: theme.stone,
+                    fontSize: 10,
+                    fontWeight: 900,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
+                    {unresolvedCount > 9 ? '9+' : unresolvedCount}
+                  </div>
+                )}
+              </div>
               <div style={{ fontSize: 10, color: isAct ? theme.gold : theme.warmGray, marginTop: 2, fontWeight: isAct ? 700 : 400 }}>
                 {isHe ? meta.he : meta.en}
               </div>
