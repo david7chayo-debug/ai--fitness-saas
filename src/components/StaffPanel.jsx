@@ -7,13 +7,12 @@ import { IGPlanner } from './IGPlanner'
 import { PromoCalc } from './PromoCalc'
 import { AlertCenter } from './AlertCenter'
 import { PromoSettings } from './PromoSettings'
-import { SportsPlanner } from './SportsPlanner'
 import { useAlerts } from '../hooks/useAlerts'
 
 const ROLE_TABS = {
   bar:   ['availability'],
-  yosi:  ['availability', 'alerts', 'instagram', 'promo', 'promo-settings', 'sports'],
-  admin: ['availability', 'menu', 'alerts', 'instagram', 'promo', 'promo-settings', 'sports'],
+  yosi:  ['availability', 'alerts', 'instagram', 'promo', 'promo-settings'],
+  admin: ['availability', 'menu', 'alerts', 'instagram', 'promo', 'promo-settings'],
 }
 
 const TAB_META = {
@@ -23,7 +22,6 @@ const TAB_META = {
   instagram:    { icon: '📸', he: 'אינסטגרם', en: 'Instagram' },
   promo:        { icon: '💰', he: 'רווחים', en: 'Profits' },
   'promo-settings': { icon: '📢', he: 'פרומו', en: 'Promo' },
-  sports:       { icon: '⚽', he: 'משחקים', en: 'Sports' },
 }
 
 export function StaffPanel({ user, menu, setMenu, lang, setLang, onLogout, onViewMenu }) {
@@ -91,7 +89,6 @@ export function StaffPanel({ user, menu, setMenu, lang, setLang, onLogout, onVie
         {active === 'instagram'    && <IGPlanner lang={lang} />}
         {active === 'promo'        && <PromoCalc lang={lang} />}
         {active === 'promo-settings' && <PromoSettings lang={lang} />}
-        {active === 'sports'       && <SportsPlanner lang={lang} />}
       </div>
 
       {/* Bottom nav */}
