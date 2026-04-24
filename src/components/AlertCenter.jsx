@@ -28,10 +28,16 @@ function roleLabel(role, lang) {
   return map[role] || role
 }
 
-export function AlertCenter({ lang }) {
+export function AlertCenter({ lang, user }) {
   const isHe = lang === 'he'
   const { alerts, resolveAlert, clearResolved, unresolvedCount } = useAlerts()
   const [showResolved, setShowResolved] = useState(false)
+  const [whatsappNumber, setWhatsappNumber] = useState(localStorage.getItem('yosi_whatsapp_number') || '972500000000')
+
+  const saveWhatsappNumber = () => {
+    localStorage.setItem('yosi_whatsapp_number', whatsappNumber)
+    alert(isHe ? 'הגדרות נשמרו!' : 'Settings saved!')
+  }
 
   const unresolved = alerts.filter(a => !a.resolved)
   const resolved = alerts.filter(a => a.resolved)
@@ -57,6 +63,75 @@ export function AlertCenter({ lang }) {
 
   return (
     <div style={{ padding: '0 0 80px' }}>
+      {/* WhatsApp Settings - Yosi/Admin only */}
+      {(user?.role === 'yosi' || user?.role === 'admin') && (
+        <div style={{
+          margin: '16px 8px 8px',
+          padding: '16px 12px',
+          background: theme.cardDeep,
+          border: `1px solid ${theme.accent}`,
+          borderRadius: 4,
+        }}>
+          <h3 style={{
+            fontSize: 14,
+            fontWeight: 900,
+            color: theme.gold,
+            marginBottom: 12,
+            textAlign: isHe ? 'right' : 'left',
+          }}>
+            📱 {isHe ? 'מספר WhatsApp לקבלת התראות' : 'WhatsApp number for alerts'}
+          </h3>
+          
+          <div style={{ marginBottom: 12 }}>
+            <input
+              type="text"
+              value={whatsappNumber}
+              onChange={e => setWhatsappNumber(e.target.value)}
+              placeholder="972500000000"
+              style={{
+                width: '100%',
+                padding: '8px 12px',
+                border: `1px solid ${theme.accent}`,
+                borderRadius: 4,
+                background: theme.card,
+                color: theme.stone,
+                fontFamily: 'inherit',
+                fontSize: 14,
+              }}
+            />
+          </div>
+          
+          <button
+            onClick={saveWhatsappNumber}
+            style={{
+              width: '100%',
+              padding: '10px',
+              background: theme.gold,
+              color: theme.ink,
+              border: 'none',
+              borderRadius: 4,
+              fontSize: 14,
+              fontWeight: 700,
+              cursor: 'pointer',
+              transition: `background 150ms ${ease}`,
+            }}
+            onMouseEnter={e => e.target.style.background = theme.brass}
+            onMouseLeave={e => e.target.style.background = theme.gold}
+          >
+            {isHe ? 'שמור' : 'Save'}
+          </button>
+          
+          <p style={{
+            fontSize: 11,
+            color: theme.warmGray,
+            marginTop: 8,
+            textAlign: isHe ? 'right' : 'left',
+          }}>
+            {isHe ? 'התראות יישלחו אוטומטית כשמוצר נגמר' : 'Alerts sent automatically when item runs out'}
+          </p>
+        </div>
+      )}
+
       {/* Header */}
       <div style={{ padding: '16px 16px 8px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>

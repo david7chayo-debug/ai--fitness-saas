@@ -7,6 +7,7 @@ export function AvailabilityEditor({ menu, setMenu, lang }) {
   const isHe = lang === 'he'
   const { addAlert } = useAlerts()
   const [modal, setModal] = useState(null) // { catKey, subcatIdx, itemIdx, item }
+  const [toast, setToast] = useState(null) // { message, type }
 
   function toggleItem(catKey, subcatIdx, itemIdx) {
     const item = menu[catKey].subcats[subcatIdx].items[itemIdx]
@@ -50,6 +51,10 @@ export function AvailabilityEditor({ menu, setMenu, lang }) {
         category_en: cat.label_en,
         reportedBy: 'bar',
       })
+      
+      // Show toast
+      setToast({ message: isHe ? '📱 נשלח התראה ליוסי' : '📱 Alert sent to Yosi', type: 'success' })
+      setTimeout(() => setToast(null), 3000)
     }
     
     setModal(null)
@@ -249,6 +254,27 @@ export function AvailabilityEditor({ menu, setMenu, lang }) {
               </button>
             </div>
           </div>
+        </div>
+      )}
+
+      {/* Toast */}
+      {toast && (
+        <div style={{
+          position: 'fixed',
+          bottom: 20,
+          left: '50%',
+          transform: 'translateX(-50%)',
+          background: '#FFD700',
+          color: '#000',
+          padding: '12px 20px',
+          borderRadius: 8,
+          fontSize: 14,
+          fontWeight: 700,
+          boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
+          zIndex: 10000,
+          animation: 'fadeIn 300ms ease-out, fadeOut 300ms ease-in 2700ms',
+        }}>
+          {toast.message}
         </div>
       )}
     </div>

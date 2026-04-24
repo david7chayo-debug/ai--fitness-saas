@@ -5,7 +5,7 @@ export const DEFAULT_MENU = {
       {
         title_he: 'בקבוק', title_en: 'Bottle',
         items: [
-          { id:'b1', he:'גולדסטאר', en:'Goldstar', price:'28/32 ₪', emoji:'🍺', vibe_he:'המלך של הבר. תמיד היה, תמיד יהיה.', vibe_en:'The king of the bar. Always was, always will be.', note_he:'לאגר ישראלי · 4.9%', note_en:'Israeli lager · 4.9%', active:true },
+          { id:'b1', he:'גולדסטאר', en:'Goldstar', price:'28/32 ₪', emoji:'🍺', vibe_he:'המלך של הבר. תמיד היה, תמיד יהיה.', vibe_en:'The king of the bar. Always was, always will be.', note_he:'לאגר ישראלי · 4.9%', note_en:'Israeli lager · 4.9%', active:true, popular:true },
           { id:'b2', he:'מכבי', en:'Maccabi', price:'28/32 ₪', emoji:'🍺', vibe_he:'נקייה, קלילה, מרעננת. הקלאסיקה הישראלית.', vibe_en:'Clean, light, refreshing. The Israeli classic.', note_he:'לאגר פרמיום · 4.9%', note_en:'Premium lager · 4.9%', active:true },
           { id:'b3', he:'קרלסברג', en:'Carlsberg', price:'28/32 ₪', emoji:'🍺', vibe_he:'אחת הבירות הנמכרות בעולם. לא סתם.', vibe_en:"One of the world's best-selling beers. Not for nothing.", note_he:'לאגר דני · 5.0%', note_en:'Danish lager · 5.0%', active:true },
           { id:'b4', he:'היינקן', en:'Heineken', price:'28 ₪', emoji:'🍺', vibe_he:'בירת המכס. מגיע ממנה.', vibe_en:'The airport beer. It earns its status.', note_he:'לאגר הולנדי · 5.0%', note_en:'Dutch lager · 5.0%', active:true },
@@ -25,7 +25,7 @@ export const DEFAULT_MENU = {
       {
         title_he: 'חבית', title_en: 'Draft',
         items: [
-          { id:'d1', he:'שפירא IPA', en:'Shapira IPA', price:'28/32 ₪', emoji:'🍻', vibe_he:'IPA ירושלמית מהמרתף של האחים שפירא. הדרי, אשכולית, מרירות מהנה.', vibe_en:"Jerusalem IPA from the Shapira brothers' basement. Citrus, grapefruit, satisfying bitterness.", note_he:'IPA · 6.5% · מבשלת שפירא, ירושלים', note_en:'IPA · 6.5% · Shapira Brewery, Jerusalem', active:true },
+          { id:'d1', he:'שפירא IPA', en:'Shapira IPA', price:'28/32 ₪', emoji:'🍻', vibe_he:'IPA ירושלמית מהמרתף של האחים שפירא. הדרי, אשכולית, מרירות מהנה.', vibe_en:"Jerusalem IPA from the Shapira brothers' basement. Citrus, grapefruit, satisfying bitterness.", note_he:'IPA · 6.5% · מבשלת שפירא, ירושלים', note_en:'IPA · 6.5% · Shapira Brewery, Jerusalem', active:true, popular:true },
           { id:'d2', he:'היינקן חבית', en:'Heineken Draft', price:'28/32 ₪', emoji:'🍺', vibe_he:'מהחבית זה אחרת. קרירה, מוקצפת, כמו שצריך.', vibe_en:"From the tap it's different. Cold, foamy, exactly right.", note_he:'לאגר · 5.0% · חצי / שלם', note_en:'Lager · 5.0% · Half / Full', active:true },
           { id:'d3', he:'וויסנשטפן חיטה', en:'Weihenstephan Hefeweizen', price:'32/36 ₪', emoji:'🌾', vibe_he:'בירת החיטה הטובה בעולם. מוסד בווארי מ-1040. בננה וציפורן.', vibe_en:"The world's best wheat beer. Bavarian institution since 1040. Banana and clove.", note_he:'חיטה · 5.4% · המבשלה העתיקה בעולם', note_en:"Hefeweizen · 5.4% · World's oldest brewery", active:true },
           { id:'d4', he:'גולדסטאר לא מסוננת חבית', en:'Goldstar Unfiltered Draft', price:'28/32 ₪', emoji:'🌾', vibe_he:'גולדסטאר כמו שהיא צריכה להיות. ישר מהחבית, ישר ללב.', vibe_en:'Goldstar as it should be. Straight from the tap, straight to the heart.', note_he:'בלתי מסוננת · 4.9%', note_en:'Unfiltered · 4.9%', active:true },
@@ -72,7 +72,7 @@ export const DEFAULT_MENU = {
       {
         title_he: 'קוקטיילים', title_en: 'Cocktails',
         items: [
-          { id:'c1', he:'אפרול ספריץ', en:'Aperol Spritz', price:'45 ₪', emoji:'🍊', vibe_he:'כתום, קליל, מרענן. הקוקטייל של השקיעה.', vibe_en:'Orange, light, refreshing. The sunset cocktail.', active:true },
+          { id:'c1', he:'אפרול ספריץ', en:'Aperol Spritz', price:'45 ₪', emoji:'🍊', vibe_he:'כתום, קליל, מרענן. הקוקטייל של השקיעה.', vibe_en:'Orange, light, refreshing. The sunset cocktail.', active:true, popular:true },
           { id:'c2', he:'וויסקי סאוור', en:'Whisky Sour', price:'45 ₪', emoji:'🍋', vibe_he:'חמצמץ, מתוק, עם בעיטה. קלאסיקה שלא מתיישנת.', vibe_en:'Sour, sweet, with a kick. A classic that never ages.', active:true },
           { id:'c3', he:'נגרוני', en:'Negroni', price:'45 ₪', emoji:'🍷', vibe_he:"ג'ין, קמפרי, ורמוט. מר, עמוק, מתוחכם.", vibe_en:'Gin, Campari, vermouth. Bitter, deep, sophisticated.', active:true },
           { id:'c4', he:"ג'ין טוניק", en:'Gin & Tonic', price:'45 ₪', emoji:'🫧', vibe_he:"הג'ין עושה את העבודה, הטוניק מסיים אותה.", vibe_en:'The gin does the work, the tonic finishes it.', active:true },
@@ -84,7 +84,7 @@ export const DEFAULT_MENU = {
         items: [
           { id:'m1', he:'וודקה פילזנר', en:'Vodka Pilzner', price:'45 ₪', emoji:'💥', vibe_he:'וודקה עם בירה. פשוט, יעיל, עובד.', vibe_en:'Vodka with beer. Simple, effective, works.', active:true },
           { id:'m2', he:'וויסקי קולה', en:'Whisky Cola', price:'45 ₪', emoji:'🥤', vibe_he:'הקלאסיק הנצחי. לא צריך הסבר.', vibe_en:'The eternal classic. No explanation needed.', active:true },
-          { id:'m3', he:'שרק לימונית', en:'Sharak Limonit', price:'35 ₪', emoji:'🍋', vibe_he:'ערק + לימונדה ביתית. הרגשה ישראלית מאה אחוז.', vibe_en:'Arak + house lemonade. One hundred percent Israeli.', note_he:'ערק + לימונדה', note_en:'Arak + Lemonade', active:true },
+          { id:'m3', he:'שרק לימונית', en:'Sharak Limonit', price:'35 ₪', emoji:'🍋', vibe_he:'ערק + לימונדה ביתית. הרגשה ישראלית מאה אחוז.', vibe_en:'Arak + house lemonade. One hundred percent Israeli.', note_he:'ערק + לימונדה', note_en:'Arak + Lemonade', active:true, popular:true },
         ]
       }
     ]
@@ -124,7 +124,7 @@ export const DEFAULT_MENU = {
       {
         title_he: 'תה הבית', title_en: 'House Tea',
         items: [
-          { id:'t1', he:'תה הבית', en:'House Tea', price:'15 ₪', emoji:'🍵', vibe_he:'מנטה, קינמון, דבש ולימון. כמו שסבתא הייתה מכינה.', vibe_en:"Mint, cinnamon, honey and lemon. Like grandma used to make.", note_he:'מנטה · קינמון · דבש · לימון', note_en:'Mint · Cinnamon · Honey · Lemon', active:true },
+          { id:'t1', he:'תה הבית', en:'House Tea', price:'15 ₪', emoji:'🍵', vibe_he:'מנטה, קינמון, דבש ולימון. כמו שסבתא הייתה מכינה.', vibe_en:"Mint, cinnamon, honey and lemon. Like grandma used to make.", note_he:'מנטה · קינמון · דבש · לימון', note_en:'Mint · Cinnamon · Honey · Lemon', active:true, popular:true },
         ]
       },
       {

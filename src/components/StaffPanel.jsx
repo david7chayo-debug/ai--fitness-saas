@@ -85,7 +85,7 @@ export function StaffPanel({ user, menu, setMenu, lang, setLang, onLogout, onVie
       <div key={active} style={{ animation: 'fadeSlideIn 200ms cubic-bezier(0.4,0,0.2,1) both' }}>
         {active === 'availability' && <AvailabilityEditor menu={menu} setMenu={setMenu} lang={lang} />}
         {active === 'menu'         && <MenuEditor menu={menu} setMenu={setMenu} lang={lang} />}
-        {active === 'alerts'       && <AlertCenter lang={lang} />}
+        {active === 'alerts'       && <AlertCenter lang={lang} user={user} />}
         {active === 'instagram'    && <IGPlanner lang={lang} />}
         {active === 'promo'        && <PromoCalc lang={lang} />}
         {active === 'promo-settings' && <PromoSettings lang={lang} />}

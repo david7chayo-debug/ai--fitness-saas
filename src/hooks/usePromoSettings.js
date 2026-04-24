@@ -9,6 +9,16 @@ const DEFAULT_PROMO_SETTINGS = {
   color: 'gold'  // 'gold' | 'blue' | 'red'
 }
 
+const DEFAULT_SPECIAL_SETTINGS = {
+  active: false,
+  text_he: 'הלילה: קסטל טרופיקל ב-28₪ בלבד 🥭',
+  text_en: 'Tonight: Kasteel Tropical only 28₪ 🥭',
+}
+
 export function usePromoSettings() {
   return useStorage('yosi_promo_settings', DEFAULT_PROMO_SETTINGS)
+}
+
+export function useSpecialSettings() {
+  return useStorage('yosi_special', DEFAULT_SPECIAL_SETTINGS)
 }

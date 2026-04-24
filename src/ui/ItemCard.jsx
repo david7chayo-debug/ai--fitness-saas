@@ -18,8 +18,8 @@ export function ItemCard({ item, lang, index = 0 }) {
       animationDelay: `${index * 30}ms`,
     }}>
       <div style={{
-        width: 56,
-        height: 56,
+        width: 60,
+        height: 60,
         borderRadius: 6,
         background: theme.card,
         border: `1px solid ${theme.accent}`,
@@ -27,7 +27,7 @@ export function ItemCard({ item, lang, index = 0 }) {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        fontSize: 28,
+        fontSize: 30,
         overflow: 'hidden',
       }}>
         {item.img && !imgErr ? (
@@ -44,19 +44,36 @@ export function ItemCard({ item, lang, index = 0 }) {
 
       <div style={{ flex: 1, minWidth: 0 }}>
         <div style={{
-          fontSize: 15,
+          fontSize: 16,
           fontWeight: 700,
           color: theme.stone,
           lineHeight: 1.3,
           marginBottom: 2,
+          display: 'flex',
+          alignItems: 'center',
+          gap: 6,
         }}>
           {name}
+          {item.popular && (
+            <span style={{
+              background: theme.accent,
+              color: theme.gold,
+              fontSize: 9,
+              fontWeight: 700,
+              letterSpacing: 1,
+              padding: '2px 6px',
+              borderRadius: 10,
+              whiteSpace: 'nowrap',
+            }}>
+              {lang === 'he' ? '🔥 פופולרי' : '🔥 Popular'}
+            </span>
+          )}
         </div>
         {vibe && (
           <div style={{
             fontFamily: "'Libre Baskerville', serif",
             fontStyle: 'italic',
-            fontSize: 11,
+            fontSize: 12,
             color: theme.gold,
             lineHeight: 1.4,
             marginBottom: note ? 2 : 0,
@@ -66,7 +83,7 @@ export function ItemCard({ item, lang, index = 0 }) {
         )}
         {note && (
           <div style={{
-            fontSize: 10,
+            fontSize: 11,
             color: theme.warmGray,
             fontWeight: 300,
           }}>
@@ -80,7 +97,7 @@ export function ItemCard({ item, lang, index = 0 }) {
         background: theme.card,
         border: `1px solid ${theme.brass}`,
         color: theme.gold,
-        fontSize: 12,
+        fontSize: 13,
         fontWeight: 700,
         padding: '4px 8px',
         borderRadius: 4,
